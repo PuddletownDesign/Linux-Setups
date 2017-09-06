@@ -242,6 +242,16 @@ It should be working here. If not go back and recheck the `ssh_config` file.
 
 This is a good place to take a snapshot! I called mine "SSH Configured".
 
+## Starting a headless machine from the command line
+
+Make sure to change `"Debian Headless"` to whatever you named the VM in virtualbox.
+
+> Note: If you close the terminal window after running the command, it will abort the server... It might be easier just to start it headless from within the virtualbox manager. Powering off from within the machine will end the process. Do not force cancel it.
+
+```bash
+VBoxHeadless --startvm "Debian Headless"
+```
+
 ## Setting up basic personal configs like ZSH and git
 
 First install git and zsh
