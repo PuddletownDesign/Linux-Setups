@@ -11,6 +11,46 @@ The goals are:
 5.  Setting up a development environment
 6.  Pen testing against the server
 
+## Table of Contents
+
+-   [Install via Virtual Box](#install-via-virtual-box)
+    -   [Creating a Virtual Box VM](#creating-a-virtual-box-vm)
+-   [Installing Debian](#installing-debian)
+    -   [Select the packages to install](#select-the-packages-to-install)
+    -   [Boot into the system](#boot-into-the-system)
+-   [Take a snapshot](#take-a-snapshot)
+-   [Installing SSH](#installing-ssh)
+-   [Configuring Virtualbox for SSH access](#configuring-virtualbox-for-ssh-access)
+    -   [Finding the IP address of the VM](#finding-the-ip-address-of-the-vm)
+    -   [Logging in via SSH](#logging-in-via-ssh)
+-   [Setting up Debian SSH](#setting-up-debian)
+    -   [Setting up key pairs for passwordless login](#setting-up-key-pairs-for-passwordless-login)
+    -   [Generating keypairs (skip if you already have them from before)](#generating-keypairs-skip-if-you-already-have-them-from-before)
+    -   [Copying the SSH keypairs to the guest OS (Debian)](#copying-the-ssh-keypairs-to-the-guest-os-debian)
+-   [Configure SSH](#configure-ssh)
+    -   [PermitRootLogin prohibit-password](#permitrootlogin-prohibit-password)
+    -   [PasswordAuthentication yes](#passwordauthentication-yes)
+-   [Take a snapshot](#take-a-snapshot)
+-   [Starting a headless machine from the command line](#starting-a-headless-machine-from-the-command-line)
+-   [Setting up basic personal configs like ZSH and git](#setting-up-basic-personal-configs-like-zsh-and-git)
+    -   [Installing presets](#installing-presets)
+    -   [Installing Git Presets](#installing-git-presets)
+    -   [Installing zsh and oh my zsh presets](#installing-zsh-and-oh-my-zsh-presets)
+    -   [Install `thefuck`](#install-thefuck)
+-   [Take a snapshot](#take-a-snapshot)
+-   [Configuring Local atom to read files over SSH](#configuring-local-atom-to-read-files-over-ssh)
+    -   [Install `remote-atom` on the host (Mac)](#install-remote-atom-on-the-host-mac)
+    -   [Install `rmate` on guest (Debian)](#install-rmate-on-guest-debian)
+    -   [Testing out `ratom` on the host](#testing-out-ratom-on-the-host)
+-   [Fixing the giant ssh login prompt on the Host side](#fixing-the-giant-ssh-login-prompt-on-the-host-side)
+-   [_working portion of the guide..._](#working-portion-of-the-guide)
+-   [Setting up guest (Debian) keys for github](#setting-up-guest-debian-keys-for-github)
+-   [Securing Debian for public use](#securing-debian-for-public-use)
+    -   [Upgrading the system](#upgrading-the-system)
+    -   [Locking down presets](#locking-down-presets)
+    -   [Installing tripwire](#installing-tripwire)
+-   [Setting up an nginx web server](#setting-up-an-nginx-web-server)
+
 ## Install via Virtual Box
 
 Install Virtualbox if you don't have it
