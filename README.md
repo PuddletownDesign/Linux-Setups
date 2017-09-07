@@ -657,11 +657,25 @@ You should see the nginx default page.
 
 Let's go a step further and make the page look more interesting. 
 
+```bash
+cd /var/www/html
+
+sudo cp index.nginx-debian.html index.html
+```
+
+Now open up the copied `index.html` file in atom.
+
+    sudo ratom index.html
+
 I'm going to use my default place holder template. You can do whatever you want. Copy and paste this low bandwidth mess right into the index.html file.
 
 ```html
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width; initial-scale=1.0"><title>Index</title><style type="text/css">html,body{margin:0;padding:0}html{position:relative;height:100%;background:#000111 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iRHJvcHBsZXQiIG9wYWNpdHk9IjAuNyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI1MDBweCIgaGVpZ2h0PSI1MDBweCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwMCA1MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiMwOEJCREMiIGQ9Ik0yNTYuMjk3LDM4LjQ5OWMwLDEwNC40NzUtMTM5LjI5OCwxNjkuNDgxLTEzOS4yOTgsMjc4LjU5OGMwLDEwOS4xMiw5NC44OTcsMTM5LjI5OSwxMzkuMjk4LDEzOS4yOTljNDQuNDAyLDAsMTM5LjMtMzAuMTc5LDEzOS4zLTEzOS4yOTlDMzk1LjU5NywyMDcuOTgsMjU2LjI5NywxNDIuOTczLDI1Ni4yOTcsMzguNDk5eiIvPjwvc3ZnPg==) center;background-size:10em}body{width:100%;height:100%;background-color:rgba(0,1,17,0.7)}body::before,body::after{position:absolute;content:" ";left:0px;width:100%;height:50%}body::before{top:0;background:linear-gradient(to bottom, #000111 0%,rgba(0,1,17,0.2) 100%)}body::after{bottom:0;background:linear-gradient(to bottom, rgba(0,1,17,0.2) 0%,#000111 100%)}</style></head><body></body></html>
 ```
+
+Going back and refreshing the page, you should now see a bunch of tear drops. 
+
+Our server is up and running and we have configured a default `index.html` page.
 
 * * *
 
