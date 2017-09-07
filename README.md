@@ -157,6 +157,8 @@ run the following command to find the machine IP
 ip addr show
 ```
 
+use the `inet` version without the /24 or whatever number. Mine for example is just `192.168.1.67`
+
 ### Logging in via SSH
 
 By default debian will not allow root login (with password, which you need to set SSH public keys).
@@ -502,15 +504,64 @@ ssh debian
 
 Much easier!
 
-* * *
-
-## _working portion of the guide..._
-
-* * *
-
 ## Setting up guest (Debian) keys for github
 
 Since you've made an edit eariler to your `.zshrc` file. If you forked the puddletown presets, let's back them back up to your repo. So if you use this zshrc file on another linux box it will be there for you already. (Same with any gitconfigs or zshrc edits).
+
+I will be following this as the guide to adding SSH keys to github.
+
+<https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/#platform-linux>
+
+First we will have to generate a new key for your user. Make sure to replace the email with the one you use for github.
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+```bash
+a ~/.ssh/id_rsa.pub
+```
+
+now copy the contents to your clipboard and close the file.
+
+1.  Open up github website on the host.
+2.  Login
+3.  Settings > SSH & GPG keys
+4.  Add new SSH keys
+5.  Name the key. I named mine "Debian Headless"
+6.  Paste key in and save
+
+Now we will test the key
+
+```bash
+ssh -T git@github.com
+```
+
+If you get a `Hi Username!` message you are good to go.
+
+### Backing up changed settings to github
+
+So far we've only changed our `.zshrc`. Let's upload the changes to github.
+
+```bash
+cd ~/Config/ZSH
+ 
+g aa
+
+g c "added new alias for atom"
+
+g pso linux
+```
+
+You will have to enter your github username/ password. But just this time for the first push from the new system. After that it will use your SSH keys!
+
+Done! Setting Synced!
+
+* * *
+
+_working portion of the guide..._
+
+* * *
 
 ## Securing Debian for public use
 
