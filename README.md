@@ -1,11 +1,15 @@
-# Headless Debian with SSH and Samba with VirtualBox
+# Headless Debian with SSH on VirtualBox
 
 In this article we will be setting up a headless (no desktop) debian webserver in virtualbox running vanilla Debian.
 
 The goals are:
 
-1.  Have shared folder access through Samba
-2.  Log in with SSH only
+1.  Log in with SSH only
+2.  Load presets onto server
+3.  Securing the server
+4.  Setting up a web server and various services
+5.  Setting up a development environment
+6.  Pen testing against the server
 
 ## Install via Virtual Box
 
