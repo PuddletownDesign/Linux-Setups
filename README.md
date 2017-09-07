@@ -45,16 +45,16 @@ The goals are:
 -   [Setting up guest (Debian) keys for github](#setting-up-guest-debian-keys-for-github)
     -   [Backing up changed settings to github](#backing-up-changed-settings-to-github)
 -   [Important Admin stuff - MOTD](#important-admin-stuff-motd)
+-   [Setting up an nginx web server](#setting-up-an-nginx-web-server)
 
-_Work in Progress portion of the guide_
+### _Work in Progress portion of the guide_
 
 -   [Securing Debian for public use](#securing-debian-for-public-use)
     -   [Upgrading the system](#upgrading-the-system)
     -   [Locking down presets](#locking-down-presets)
-    -   [Installing IPtables](#installing-iptables)
--   [Configuring Fail2ban](#configuring-fail2ban)
--   [Configuring TripWire](#configuring-tripwire)
--   [Setting up an nginx web server](#setting-up-an-nginx-web-server)
+        -   [Installing IPtables](#installing-iptables)
+        -   [Configuring Fail2ban](#configuring-fail2ban)
+        -   [Configuring TripWire](#configuring-tripwire)
 -   [Opening up nginx to the public](#opening-up-nginx-to-the-public)
 -   [Basic Server Logging](#basic-server-logging)
 -   [Ongoing adjustment of settings and services](#ongoing-adjustment-of-settings-and-services)
@@ -598,7 +598,7 @@ sudo ratom /etc/motd
 Now let's add a multicolored fortune telling cow to your ssh login instead. 
 
 ```bash
-sudo apt-get install cowsay fortune
+sudo apt-get install cowsay fortune -y
 ```
 
 now replace the contents of the  `/etc/update-motd.d/10-uname` file. This file is what prints out the string with os and last login.
@@ -619,7 +619,7 @@ X="\033[00;37m"
 echo "$G"
 uname -snrvm
 echo "$B"
-/usr/games/fortune | /usr/games/cowsay 
+/usr/games/fortune | /usr/games/cowthink
 printf "\n$R"
 ```
 
@@ -633,6 +633,34 @@ The following turns off displaying the date you last logged in. This works on ma
 
 ```bash
 touch .hushlogin
+```
+
+## Setting up an nginx web server
+
+I'll be following this guide for the most part.
+
+<https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-debian-8>
+
+Here we will set up an nginx webserver that will be available over the local network. We will have a single testing page that is viewable over the local network.
+
+### Installing Nginx
+
+```bash
+sudo apt-get install nginx -y
+```
+
+Test the webserver from a host browser. Enter the IP address of the VM that you use for SSH or grab the `inet` from running `ip addr show`.
+
+You should see the nginx default page.
+
+![nginx is running](http://tinyimg.io/i/XVnjidD.png)
+
+Let's go a step further and make the page look more interesting. 
+
+I'm going to use my default place holder template. You can do whatever you want. Copy and paste this low bandwidth mess right into the index.html file.
+
+```html
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width; initial-scale=1.0"><title>Index</title><style type="text/css">html,body{margin:0;padding:0}html{position:relative;height:100%;background:#000111 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iRHJvcHBsZXQiIG9wYWNpdHk9IjAuNyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI1MDBweCIgaGVpZ2h0PSI1MDBweCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwMCA1MDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiMwOEJCREMiIGQ9Ik0yNTYuMjk3LDM4LjQ5OWMwLDEwNC40NzUtMTM5LjI5OCwxNjkuNDgxLTEzOS4yOTgsMjc4LjU5OGMwLDEwOS4xMiw5NC44OTcsMTM5LjI5OSwxMzkuMjk4LDEzOS4yOTljNDQuNDAyLDAsMTM5LjMtMzAuMTc5LDEzOS4zLTEzOS4yOTlDMzk1LjU5NywyMDcuOTgsMjU2LjI5NywxNDIuOTczLDI1Ni4yOTcsMzguNDk5eiIvPjwvc3ZnPg==) center;background-size:10em}body{width:100%;height:100%;background-color:rgba(0,1,17,0.7)}body::before,body::after{position:absolute;content:" ";left:0px;width:100%;height:50%}body::before{top:0;background:linear-gradient(to bottom, #000111 0%,rgba(0,1,17,0.2) 100%)}body::after{bottom:0;background:linear-gradient(to bottom, rgba(0,1,17,0.2) 0%,#000111 100%)}</style></head><body></body></html>
 ```
 
 * * *
@@ -667,7 +695,7 @@ I'll be following most of this guide for this section
 
 onto a quick detour to install and configure IPtables
 
-### Installing IPtables
+#### Installing IPtables
 
 I will be following this guide for configuring IPtables
 
@@ -681,9 +709,11 @@ Let's first list the current ruleset for ipTables
 sudo iptables -L
 ```
 
-Let's add our first rule for SSH  (port 22) and HTTP (port 80)
+Let's add our first rules for 
 
 ```bash
+sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
 sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 
 sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
@@ -691,21 +721,48 @@ sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 sudo iptables -I INPUT 1 -i lo -j ACCEPT
 ```
 
-## Configuring Fail2ban
+-   The first rule explicitly will accept incoming SSH connections. 
+-   The second and 3rd rules open up ports for SSH (22) and HTTP (80)
+-   The last rule allows system services to speak with each other through the local network loopback.
 
-Basic Configuration settings for ssh or http ddos
+#### Configuring Fail2ban
 
-## Configuring TripWire
+Now we want to install `fail2ban` which is a tool for detecting and banning IP address that behave maliciously/ suspiciously.
+
+This doesn't stop an attacker from say spoofing a fake IP address with each new connection, but that's more work. 
+
+We will be folling this guide for the fail2ban section.
+
+<https://www.digitalocean.com/community/tutorials/how-to-protect-ssh-with-fail2ban-on-ubuntu-14-04>
+
+Please read this entire article carefully.
+
+##### Installing `fail2ban`
+
+```bash
+sudo apt-get update
+sudo apt-get install fail2ban -y
+```
+
+> The fail2ban service keeps its configuration files in the /etc/fail2ban directory. There is a file with defaults called jail.conf.
+
+I don't recommend editing the default jail file. We will be making a copy of it. It's best to let the `jail.conf` file hold all default configs and then make our changes in a `jail.local`
+
+We will copy over that file, with the contents commented out, as the basis for the jail.local file. You can do this by running:
+
+```bash
+awk '{ printf "# "; print; }' /etc/fail2ban/jail.conf | sudo tee /etc/fail2ban/jail.local
+```
+
+###### Editing the `jail.local` file
+
+```bash
+sudo ratom /etc/fail2ban/jail.local
+```
+
+#### Configuring TripWire
 
 Settings for banning / logging abusive ips
-
-## Setting up an nginx web server
-
-I'll be following this guide for the most part.
-
-<https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-debian-8>
-
-Here we will set up an nginx webserver that will be available over the local network. We will have a single testing page that is viewable
 
 ## Opening up nginx to the public
 
