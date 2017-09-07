@@ -632,7 +632,7 @@ There's also a myriad of fun scripts and messages to tinker with if cows don't s
 The following turns off displaying the date you last logged in. This works on mac too...
 
 ```bash
-touch .hushlogin
+touch ~/.hushlogin
 ```
 
 ## Setting up an nginx web server
@@ -676,6 +676,8 @@ I'm going to use my default place holder template. You can do whatever you want.
 Going back and refreshing the page, you should now see a bunch of tear drops. 
 
 Our server is up and running and we have configured a default `index.html` page.
+
+![teardrops](http://tinyimg.io/i/FssCw6b.png)
 
 * * *
 
