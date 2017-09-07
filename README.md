@@ -288,27 +288,9 @@ It should be working here. If not go back and recheck the `ssh_config` file.
 
 This is a good place to take a snapshot! I called mine "SSH Configured".
 
-## Hush the login messages
-
-In Debian execute the following to change or edit the ssh log in message.
-
-This turns off displaying the date you last logged in.
-
-```bash
-touch .hushlogin
-```
-
-Turn off Message of the day or edit. I removed all the text in mine.
-
-Cowsay would be nice though...
-
-```bash
-nano /etc/motd
-```
-
 ## Starting a headless machine from the command line
 
-> Note: If you close the terminal window after running the command, it will abort the server... It might be easier just to start it headless from within the virtualbox manager. Powering off from within the machine will end the process. Do not force cancel it.
+> Note: If you close the terminal window after running the boot vm command, it will abort the server... It might be easier just to start it headless from within the virtualbox manager. Powering off from within the machine will end the process. Do not force cancel it.
 
 Make sure to change `"Debian Headless"` to whatever you named the VM in virtualbox.
 
@@ -407,6 +389,14 @@ Log out and then back in with SSH.
 
 You should now have a tits fancy prompt :)
 
+### ZSH Syntax Highlighting
+
+```bash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+And that should be all... There is already a reference to it in the puddletown `zshrc` file.
+
 ### Install `thefuck`
 
 Let's install `thefuck`, cause it's handy #1 and will also get rid of the error at the zsh prompt.
@@ -488,6 +478,8 @@ a test.txt
 Save and edit the file! You can confirm you just edited the remote file by opening it up in the guest with `nano` and checking to see if the edits were made.
 
 Boom! Host editor configured to edit all dem files!
+
+> One note - is if you currently have a file open on the host and try to logout/exit, the terminal will hang until the open file is closed.
 
 ## Fixing the giant ssh login prompt on the Host side
 
@@ -577,6 +569,56 @@ You will have to enter your github username/ password. But just this time for th
 
 Done! Setting Synced!
 
+## Important Admin stuff - MOTD
+
+We want to add or alter the message that displays when logging into Debian.
+
+Turn off Message of the day or edit the file. This file is only used for static text, no scripts can be put in here. **I removed all the text in mine.**
+
+```bash
+sudo ratom /etc/motd
+```
+
+Now let's add a multicolored fortune telling cow to your ssh login instead. 
+
+```bash
+sudo apt-get install cowsay fortune
+```
+
+now replace the contents of the  `/etc/update-motd.d/10-uname` file. This file is what prints out the string with os and last login.
+
+```bash
+sudo ratom /etc/update-motd.d/10-uname
+```
+
+Add the following:
+
+```bash
+W="\033[01;37m"
+B="\033[01;34m"
+R="\033[01;31m" 
+G="\033[01;32m"
+X="\033[00;37m"
+
+echo "$G"
+uname -snrvm
+echo "$B"
+/usr/games/fortune | /usr/games/cowsay 
+printf "\n$R"
+```
+
+This is a big improvement to our VM. 
+
+There's also a myriad of fun scripts and messages to tinker with if cows don't suit your fancy.
+
+### If minimalism is more your thing
+
+The following turns off displaying the date you last logged in. This works on mac too...
+
+```bash
+touch .hushlogin
+```
+
 * * *
 
 _working portion of the guide..._
@@ -623,6 +665,24 @@ Let's first list the current ruleset for ipTables
 sudo iptables -L
 ```
 
+Let's add our first rule for SSH  (port 22) and HTTP (port 80)
+
+```bash
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+
+sudo iptables -I INPUT 1 -i lo -j ACCEPT
+```
+
+## Configuring Fail2ban
+
+Basic Configuration settings for ssh or http ddos
+
+## Configuring TripWire
+
+Settings for banning / logging abusive ips
+
 ## Setting up an nginx web server
 
 I'll be following this guide for the most part.
@@ -630,3 +690,15 @@ I'll be following this guide for the most part.
 <https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-debian-8>
 
 Here we will set up an nginx webserver that will be available over the local network. We will have a single testing page that is viewable
+
+## Opening up nginx to the public
+
+Open up virtualbox and debians intall of nginx to the public over your home ip.
+
+## Basic Server Logging
+
+Effective methods of logging and flagging in bound connections
+
+## Ongoing adjustment of settings and services
+
+find a comfortable default to run the server on
