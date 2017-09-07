@@ -1,5 +1,7 @@
 # Headless Debian with SSH on VirtualBox
 
+![debian](http://tinyimg.io/i/k9vc7m5.png)
+
 In this article we will be setting up a headless (no desktop) debian webserver in virtualbox running vanilla Debian.
 
 The goals are:
@@ -61,7 +63,7 @@ Grab a Debian Net installer torrent
 
 <https://cdimage.debian.org/debian-cd/current/amd64/bt-cd/debian-9.1.0-amd64-netinst.iso.torrent>
 
-¡Keep the torrent seeding for the community!
+**¡Keep the torrent seeding for the community!**
 
 ### Creating a Virtual Box VM
 
@@ -158,6 +160,8 @@ ip addr show
 ```
 
 use the `inet` version without the /24 or whatever number. Mine for example is just `192.168.1.67`
+
+![finding the correct ip](http://tinyimg.io/i/sI0UflX.png)
 
 ### Logging in via SSH
 
@@ -389,7 +393,11 @@ Log out and then back in with SSH.
 
 You should now have a tits fancy prompt :)
 
+![new prompt](http://tinyimg.io/i/Hi1OBix.png)
+
 ### ZSH Syntax Highlighting
+
+This will make invalid commands you type red and correct commands green.
 
 ```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -572,6 +580,8 @@ Done! Setting Synced!
 ## Important Admin stuff - MOTD
 
 We want to add or alter the message that displays when logging into Debian.
+
+![cowpower](http://tinyimg.io/i/rQ7iRQY.png)
 
 Turn off Message of the day or edit the file. This file is only used for static text, no scripts can be put in here. **I removed all the text in mine.**
 
