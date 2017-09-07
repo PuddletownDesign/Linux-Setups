@@ -47,18 +47,6 @@ The goals are:
 -   [Important Admin stuff - MOTD](#important-admin-stuff-motd)
 -   [Setting up an nginx web server](#setting-up-an-nginx-web-server)
 
-### _Work in Progress portion of the guide_
-
--   [Securing Debian for public use](#securing-debian-for-public-use)
-    -   [Upgrading the system](#upgrading-the-system)
-    -   [Locking down presets](#locking-down-presets)
-        -   [Installing IPtables](#installing-iptables)
-        -   [Configuring Fail2ban](#configuring-fail2ban)
-        -   [Configuring TripWire](#configuring-tripwire)
--   [Opening up nginx to the public](#opening-up-nginx-to-the-public)
--   [Basic Server Logging](#basic-server-logging)
--   [Ongoing adjustment of settings and services](#ongoing-adjustment-of-settings-and-services)
-
 ## Install via Virtual Box
 
 Install Virtualbox if you don't have it
