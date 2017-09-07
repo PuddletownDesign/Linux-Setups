@@ -305,7 +305,11 @@ however you can test out that the configs are installed by running the `git stat
 
 go back into the configs directory that you made before and let's install zsh presets.
 
-First let's install oh my ZSH (we have to install curl or wget first). Then I'm going to use wget to download it, because it's a little more snazzy than curl.
+```bash
+cd ~/Config
+```
+
+First we have to install `curl` or `wget` first to install oh my ZSH . Then I'm going to use `wget` to download it, because it's a little more snazzy than curl.
 
 ```bash
 sudo apt-get install curl wget -y
