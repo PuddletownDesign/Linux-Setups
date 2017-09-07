@@ -288,6 +288,24 @@ It should be working here. If not go back and recheck the `ssh_config` file.
 
 This is a good place to take a snapshot! I called mine "SSH Configured".
 
+## Hush the login messages
+
+In Debian execute the following to change or edit the ssh log in message.
+
+This turns off displaying the date you last logged in.
+
+```bash
+touch .hushlogin
+```
+
+Turn off Message of the day or edit. I removed all the text in mine.
+
+Cowsay would be nice though...
+
+```bash
+nano /etc/motd
+```
+
 ## Starting a headless machine from the command line
 
 > Note: If you close the terminal window after running the command, it will abort the server... It might be easier just to start it headless from within the virtualbox manager. Powering off from within the machine will end the process. Do not force cancel it.
@@ -514,6 +532,8 @@ I will be following this as the guide to adding SSH keys to github.
 
 First we will have to generate a new key for your user. Make sure to replace the email with the one you use for github.
 
+In Debian run the following commands:
+
 ```bash
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
@@ -583,7 +603,25 @@ The system should already be pretty up to date.
 
 ### Locking down presets
 
-### Installing tripwire
+I'll be following most of this guide for this section
+
+<https://www.digitalocean.com/community/tutorials/an-introduction-to-securing-your-linux-vps>
+
+onto a quick detour to install and configure IPtables
+
+### Installing IPtables
+
+I will be following this guide for configuring IPtables
+
+<https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-iptables-on-ubuntu-14-04>
+
+Iptables should be installed at the latest version already.
+
+Let's first list the current ruleset for ipTables
+
+```bash
+sudo iptables -L
+```
 
 ## Setting up an nginx web server
 
