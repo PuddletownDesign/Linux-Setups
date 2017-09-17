@@ -8,10 +8,11 @@ The goals are:
 
 1.  Log in with SSH only
 2.  Load presets onto server
-3.  Securing the server
-4.  Setting up a web server and various services
-5.  Setting up a development environment
-6.  Pen testing against the server
+3.  Sharing Files to host with Samba
+4.  Securing the server
+5.  Setting up a web server and various services
+6.  Setting up a development environment
+7.  Pen testing against the server
 
 ## Table of Contents
 
@@ -389,6 +390,14 @@ You should now have a tits fancy prompt :)
 
 ![new prompt](http://tinyimg.io/i/Hi1OBix.png)
 
+#### If for some reason your prompt is crazy messed up displaying double characters and delete key goes forward
+
+simply add the following to your zshrc
+
+```bash
+TERM=xterm # fixes bizarre character prompt issues
+```
+
 ### ZSH Syntax Highlighting
 
 This will make invalid commands you type red and correct commands green.
@@ -653,7 +662,9 @@ sudo cp index.nginx-debian.html index.html
 
 Now open up the copied `index.html` file in atom.
 
-    sudo ratom index.html
+```bash
+sudo ratom index.html
+```
 
 I'm going to use my default place holder template. You can do whatever you want. Copy and paste this low bandwidth mess right into the index.html file.
 
@@ -666,3 +677,5 @@ Going back and refreshing the page, you should now see a bunch of tear drops.
 Our server is up and running and we have configured a default `index.html` page.
 
 ![teardrops](http://tinyimg.io/i/FssCw6b.png)
+
+## Sharing Files to the host with Samba
