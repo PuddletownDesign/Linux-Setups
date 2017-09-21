@@ -781,7 +781,7 @@ git --work-tree=/var/www/html --git-dir=/var/git/default.git checkout -f
 save and close and then make the file executable.
 
 ```bash
-chmod +x post-receive
+chmod +x hooks/post-receive
 ```
 
 **Back on your local machine (remember on the host side)**
