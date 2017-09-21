@@ -1,1 +1,1 @@
-# Configuring Puddletown Development environment and workflow
+# Configuring Local Debian environment, live server and workflow
