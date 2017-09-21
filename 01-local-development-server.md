@@ -683,27 +683,27 @@ wget http://download.virtualbox.org/virtualbox/5.1.28/VBoxGuestAdditions_5.1.28.
 
 #### Installing guest additions
 
-Make a directory to mount the guest additions
+##### Make a directory to mount the guest additions
 
 `sudo mkdir /media/VBoxGuestAdditions`
 
-Now mount them to above directory
+##### Now mount them to above directory
 
 `sudo mount -o loop,ro VBoxGuestAdditions_5.1.28.iso /media/VBoxGuestAdditions`
 
-Now install them
+##### Now install them
 
 `sudo sh /media/VBoxGuestAdditions/VBoxLinuxAdditions.run`
 
-Unmount them
+##### Unmount them
 
 `sudo umount /media/VBoxGuestAdditions`
 
-Delete the directory you created to hold them
+##### Delete the directory you created to hold them
 
 `sudo rmdir /media/VBoxGuestAdditions`
 
-Delete the iso unless you want to keep it
+##### Delete the iso unless you want to keep it
 
 `rm VBoxGuestAdditions_5.1.28.iso`
 
@@ -711,18 +711,14 @@ Delete the iso unless you want to keep it
 
 Create a folder on the Host computer that you would like to share, for example `~/Documents/Dev/Sites` to `/var/www` on debian.
 
-Boot the Guest operating system in VirtualBox.
-
-Then in the vm manager Select Settings -> Shared Folders...
-
-Choose the 'Add' button.
-Select `~/Documents/Dev/Sites`
-
-Optionally select the 'Make permanent' and "auto mount" option
+1.  Boot the Guest operating system in VirtualBox.
+2.  Then in the vm manager Select Settings -> Shared Folders...
+3.  Choose the 'Add' button.
+    Select `~/Documents/Dev/Sites` Optionally select the 'Make permanent' and "auto mount" option
 
 With a shared folder named share, as above, the folder can be mounted as the directory ~/host with the command
 
-first let's trash the default nginx folder and remake it
+first let's trash the default nginx folder and remake it...
 
 ```bash
 sudo rm -rf /var/www
@@ -730,5 +726,7 @@ sudo mkdir /var/www
 ```
 
 `sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) Sites /var/www`
+
+You folder should now be mounted and in place of the `/var/www` folder.
 
 ## Setting the permissions of the mounted folder
