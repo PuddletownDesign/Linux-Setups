@@ -194,7 +194,7 @@ ssh username@ipaddress
 
 If everything is working well you should be logged in with no password!
 
-## Configure SSH
+## Configure SSH for security
 
 We want to configure SSH for two things:
 
@@ -205,7 +205,7 @@ Now that you're logged in with your user account via SSH and it has sudo privs, 
 
 First let's just **power off the VM** and then **restart it in "Headless mode"**. We don't need that stupid Virtualbox console anymore. We can use our host terminal :)
 
-Then log back in with your user account via SSH.
+Then log back in with your user account via SSH in your host terminal of choice. Mine's iterm on mac.
 
 Then lets edit the `sshd_config` file.
 
@@ -255,7 +255,7 @@ It should be working here. If not go back and recheck the `ssh_config` file.
 
 This is a good place to take a snapshot! I called mine "SSH Configured".
 
-## Starting a headless machine from the command line
+## Starting a headless machine from the command line if you really want to
 
 > Note: If you close the terminal window after running the boot vm command, it will abort the server... It might be easier just to start it headless from within the virtualbox manager. Powering off from within the machine will end the process. Do not force cancel it.
 
@@ -267,13 +267,13 @@ VBoxHeadless --startvm "Debian Headless"
 
 ## Setting up basic personal configs like ZSH and git
 
-First install git and zsh
+First install git, zsh (as well as curl and wget)
 
 ```bash
 sudo apt-get install git zsh curl wget -y
 ```
 
-Now let's install the puddletown settings. Please feel free to fork these repos before actually cloning them, so you can customize and then back them up to github later. 
+Now let's install the puddletown settings. Please feel free to fork these repos before actually cloning them, so **you can customize and then back them up to github later.**
 
 If you fork make sure to change the github username in the url when cloning.
 
@@ -289,7 +289,7 @@ In your user folder we are going to make a folder called `Config`. This folder w
 mkdir Config && cd Config
 ```
 
-then
+then... _make sure to edit the github url to your own repo if you forked mine_
 
 ```bash
 git clone https://github.com/PuddletownDesign/Git
@@ -333,6 +333,8 @@ enter your password when prompted
 Boom you should now have oh my zsh installed and zsh as your default shell!!!
 
 Now let's install the puddletown preferences.
+
+**change the following to your forked repo url, or just use mine**
 
 ```bash
 cd ~/Config
