@@ -1,112 +1,16 @@
-look at all the groups on the machine
+# COnfiguring a LEMP stack
 
-`cat /etc/group`
+here we will go through creating a LEMP stack. We've already installed nginx, now we will install & configure PHP and MYSQL
 
-look at the existing groups for your user
+We will use wordpress as an example for this lesson.
 
-`groups brent`
-
-add a group for users who will be able to rwx in the folder
-
-`sudo addgroup sftp-users`
-
-add your user to that group
-
-`sudo adduser brent sftp-users`
-
-list all the groups your user is part of
-
-`groups brent`
-
-now change the group of the `/var/www/html` folder, while leaving the owner the same.
-
-`sudo chgrp sftp-users /var/www/html`
-
-add write permissions for the group
-
-`sudo chmod 775 /var/www/html`
-
-Now set the sticky bit for the group
-
-`sudo chmod g+s /var/www/html`
-
-The 'g+s' sets the sticky bit for the group, which propagates the group AND the permissions down the tree as new files and directories are created.
-
-This allows all users in the group to freely edit those files and create new directories without having to constantly use the command-line to adjust ownership.
-
-Now we log out and back in, because we modified the user during the current session user session. 
-
-`exit`
-
-then log back in and go to the `/var/www/html`
-
-touch test.md
-
-our group has write permissions now. so we don't have to sudo. We can add other members to the group as we without modifying the owner from root.
-
-Now we are going to configure a separate nginx server block to host wordpress.
-
-At first we will basically duplicate the above process for another folder in `var/www`. However we will just set `var/www` to the same permissions as `var/www/html`
-
-```bash
-sudo chgrp www /var/www
-
-sudo chmod 775 /var/www
-
-sudo chmod g+s /var/www
-
-exit
-```
-
-Great so now users of `sftp-users` can edit `/var/www` directory and everything within.
-
-we now want to pull wordpress from their website. on the website there is a download link to a zip file. copy the link and edit it in.
-
-in `/var/www`
-
-```bash
-wget https://wordpress.org/latest.zip
-```
-
-now we need to install unzip because we don't yet have it installed
-
-```bash
-sudo apt-get install unzip -y
-```
-
-unzip it
-
-```bash
-unzip latest.zip
-```
-
-trash the zip file
-
-```bash
-rm latest.zip
-```
-
-> **A mega note**: if we had not adjusted `/var/www` for our group we would have had to wget with `sudo`. Pulling remote code with `sudo` is FUCKING SHADY. Even from a trusted source. Note you gotta sudo to apt-get though. This gives whatever you are downloading `sudo` permissions. If there is malicious code, it's now `sudo`. Be VERY CAREFUL pulling remote code with sudo FFS.
-
-Ok now we have to install a bunch of stuff to run wordpress. Mainly PHP and Mysql.
-
-<https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-on-ubuntu-16-04>
-
-I'll cover most of that guide here.
-
-anyway first we gotta install a LEMP (Linux, NGINX, MySQL, PHP) stack. 
-
-<https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04>
-
-So we already have nginx installed, let's next install MySQL
+## Installing PHP and Mysql
 
 ```bash
 sudo apt-get install php-fpm php-mysql mysql-server -y
 ```
 
-You can login to mysql by `sudo mysql`
-
-And log out with `exit`
+## Configuring PHP
 
 Now we need to adjust a few PHP configurations
 
@@ -126,10 +30,6 @@ change it to
 cgi.fix_pathinfo=0
 ```
 
-> This is an extremely insecure setting because it tells PHP to attempt to execute the closest file it can find if the requested PHP file cannot be found. This basically would allow users to craft PHP requests in a way that would allow them to execute scripts that they shouldn't be allowed to execute.
-
-We will change both of these conditions by uncommenting the line and setting it to "0" like this:
-
 Save and exit
 
 Now restart PHP
@@ -138,7 +38,70 @@ Now restart PHP
 sudo systemctl restart php7.0-fpm
 ```
 
-## Configure Nginx to Use the PHP Processor
+## Configuring MYSQL
+
+### Setting up and securing MYSQL
+
+#### Goals
+
+1.  Secure the root account with a password
+2.  Set up a new user for website access
+3.  Give that user the least amount of DB permissions needed to run wordpress
+
+Run secure installation
+
+```bash
+sudo mysql_secure_installation
+```
+
+1.  current pass is empty (just hit return)
+2.  yes for new password
+3.  enter new pass
+4.  Remove anonymous users? [Y/n] y
+5.  Disallow root login remotely? [Y/n] y
+6.  Remove test database and access to it? [Y/n] y
+7.  Reload privilege tables now? [Y/n] y 
+
+test logging in
+
+```bash
+sudo mysql -uroot -p
+
+exit
+```
+
+let's edit the config file
+
+```bash
+sudo ratom /etc/mysql/my.cnf
+```
+
+add the top of the configuration file
+
+```mysql
+# The MariaDB configuration file
+
+[mysqld]
+bind-address=127.0.0.1
+local-infile=0
+log=/var/log/mysql.log
+```
+
+save and close
+
+1.  we said that we only accept connections from the local machine
+2.  then a directive to disable this ability to load local files
+3.  then we set a location for the log file
+
+Log back into mysql
+
+CREATE USER 'brent'@'localhost' IDENTIFIED BY '15cakesmashes';
+
+## Configuring vhosts in nginx
+
+We are going to start installing wordpress as an example here.
+
+We want to add other folders that will work as a server root for a specific domain name.
 
 ```bash
 sudo ratom /etc/nginx/sites-available/default
@@ -180,93 +143,21 @@ server {
 }
 ```
 
-save and then test for any syntax errors
+and restart nginx
 
 ```bash
-sudo nginx -t
+sudo service nginx restart
 ```
 
-if the syntax is messed up go back and check for errors
+## Installing Wordpress
 
-Now reload nginx 
+Download wordpress to your local share folder on host
 
-```bash
-sudo systemctl reload nginx
-```
+rename the `wp-config-sample.php` to `wp-config.php`
 
-Now On your mac, we are going to edit your host file again.
-
-```bash
-a /etc/hosts
-```
-
-On the very last line you should have a host pointing to your server
-
-```hosts
-192.168.1.71 debian.server 
-```
-
-add the server name of the wordpress folder to that list. MAKE SURE IT IS STILL THE CORRECT IP.
-
-```hosts
-192.168.1.71 debian.server wordpress.debian
-```
-
-Hitting the url on the mac side should now serve the wordpress install!!! Don't do anything with it yet.
-
-```bash
-http://wordpress.debian
-```
-
-## Setting up and securing MYSQL
-
-Now we want to do is very similar to the directory permission except with mysql. 
-
-1.  Secure the root account with a password
-2.  Set up a new user for website access
-3.  Give that user the least amount of DB permissions needed to run wordpress
-
-```bash
-sudo mysql_secure_installation
-```
-
-1.  current pass is empty (just hit return)
-2.  yes for new password
-3.  enter new pass
-4.  Remove anonymous users? [Y/n] y
-5.  Disallow root login remotely? [Y/n] y
-6.  Remove test database and access to it? [Y/n] y
-7.  Reload privilege tables now? [Y/n] y 
-
-test logging in
-
-```bash
-sudo mysql -uroot -p
-
-exit
-```
-
-let's edit the config file
-
-```bash
-sudo ratom /etc/mysql/my.cnf
-```
-
-add the following above client server
-
-```mysql
-bind-address = 127.0.0.1
-local-infile=0
-log=/var/log/mysql.log
-```
-
-1.  we say that we only accept connections from the local machine
-2.  then a directive to disable this ability to load local files
-3.  then we set a location for the log file
+### Set up the Mysql Database
 
 Log back into mysql
-
-CREATE USER 'brent'@'localhost' IDENTIFIED BY '15cakesmashes';
 
 Now let's create the wordpress database
 
@@ -274,16 +165,18 @@ and then give our new user permissions to use it
 
 in mysql
 
-    CREATE DATABASE wordpress;
+```mysql
+CREATE DATABASE wordpress;
 
-    show databases;
+show databases;
+```
 
 You can see that wordpress is there now
 
 ```mysql
-GRANT SELECT , INSERT , UPDATE , DELETE, ALTER, CREATE , DROP , INDEX ON  `wordpress` . * TO  'wordpress'@'localhost';
+GRANT SELECT , INSERT , UPDATE , DELETE, ALTER, CREATE , DROP , INDEX ON  `wordpress` . * TO  'brent'@'localhost';
 
-GRANT ALTER, CREATE , DROP , INDEX ON  `wordpress` . * TO  'wordpress'@'localhost';
+GRANT ALTER, CREATE , DROP , INDEX ON  `wordpress` . * TO  'brent'@'localhost';
 
 SHOW GRANTS FOR 'brent'@'localhost';
 ```
@@ -296,10 +189,34 @@ mv wp-config-sample.php wp-config.php
 ratom wp-config.php
 ```
 
-then fill in `DB_NAME`, `DB_USER` and `DB_PASSWORD`,
+### Installing wordpress
 
-Go back to your browser on mac and hit the url for the wordpress server.
+You should now have a copy of wordpress in the `/var/www` that you downloaded on the host side.
+
+### Configure the wordpress config
+
+in the wordpress/config.php file edit in your database user details
+
+### Give it a domain in the Host OSs host file
+
+in your local (host side) hosts file, add a domain name for wordpress
 
 ```bash
-http://wordpress.debian
+sudo atom /etc/hosts
 ```
+
+mine looks something like this (fix it for your ip and whatever you want the fake domain name to be)
+
+```hosts
+192.168.56.107 debian.server wordpress.debian
+```
+
+Then open up <http://wordpress.debian> in your browser.
+
+## A quick review
+
+To create a new site as a vhost you need to:
+
+1.  Create a new directory for it in the shared folder
+2.  edit the sites-available/default file to make an nginx block
+3.  Modify your Host OSs /etc/hosts file with the new name
