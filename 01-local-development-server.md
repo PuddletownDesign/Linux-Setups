@@ -410,7 +410,7 @@ Open another terminal window and on the host side install `atom-remote`.
 apm install remote-atom
 ```
 
-### Install `rmate` on guest (Debian)
+### Install `rmate` (aka `ratom`) on guest (Debian)
 
 In the guest side, install `rmate`
 
