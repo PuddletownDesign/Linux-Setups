@@ -436,7 +436,7 @@ sudo ratom /etc/motd
 Now let's add a multicolored fortune telling cow to your ssh login instead. 
 
 ```bash
-sudo apt-get install cowsay fortune -y
+sudo apt-get install cowsay fortune screenfetch -y
 ```
 
 now replace the contents of the  `/etc/update-motd.d/10-uname` file. This file is what prints out the string with os and last login.
@@ -456,7 +456,7 @@ G="\033[01;32m"
 X="\033[00;37m"
 
 echo "$G"
-uname -snrvm
+screenfetch
 echo "$B"
 /usr/games/fortune | /usr/games/cowthink
 printf "\n$R"
