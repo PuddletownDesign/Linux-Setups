@@ -312,8 +312,12 @@ sudo mkdir /var/www
 
 `sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) Sites /var/www`
 
+I've created a zsh alias for this command. So I only need to type `share` to mount the share point. It would be better to have this automatically happen on boot.
+
+```bash
+alias share='sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) Sites /var/www'
+```
+
 You folder should now be mounted and in place of the `/var/www` folder.
 
-You can test this by going to `/var/www` and creating a test file. You will 
-
-## Setting the permissions of the mounted folder
+You can test this by going to `/var/www` and creating a test file. You will see it pop up on the host side.
