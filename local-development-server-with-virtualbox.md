@@ -79,7 +79,7 @@ then install ssh, an editor and net-tools
 
 ```bash
 apt-get update
-apt-get -y install sudo ssh openssh-server nano net-tools -y
+apt-get -y install sudo ssh openssh-server nano net-tools aptitude
 systemctl start ssh.service
 systemctl enable ssh.service
 ```
