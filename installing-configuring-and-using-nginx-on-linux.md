@@ -356,11 +356,13 @@ In this tutorial you learned how to:
 
 -   Install nginx
 -   Open firewall ports 80, 443 in UFW 
--   Adjust user/group permissions to edit the  `www` folder
+-   Adjust user/group permissions to edit the `www` folder
 -   Configure server blocks to host more than one site
 -   Obtain an SSL certificate to use https
 -   Auto renew the certificate with a cron job
 
 ## Where to go from here
 
-I recommend setting up git deployment for both the static IP and the new site on `<yourdomain.com>`.
+I recommend [learning how to set up git deployment for both the static IP and the new site](https://github.com/PuddletownDesign/Linux-Setups/blob/master/git-deployment.md).
+
+Good luck!

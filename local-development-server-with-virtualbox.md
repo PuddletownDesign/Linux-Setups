@@ -321,3 +321,13 @@ alias share='sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) Sites /var/www'
 You folder should now be mounted and in place of the `/var/www` folder.
 
 You can test this by going to `/var/www` and creating a test file. You will see it pop up on the host side.
+
+## Conclusion
+
+Whew! That was quite a ride, but you should now have a really functional development server set up. 
+
+## Where to go from here
+
+I recommend learning next [how to set up a production server Debian server on Digital Ocean or other VPS](https://github.com/PuddletownDesign/Linux-Setups/blob/master/configuring-debian-server-on-digital-ocean.md).
+
+Good luck!
