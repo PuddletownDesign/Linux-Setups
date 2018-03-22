@@ -172,7 +172,7 @@ It should be working here. If not go back and recheck the `ssh_config` file.
 Install `ufw`
 
 ```bash
-sudo apt-get install ufw
+sudo apt-get install ufw -y
 ```
 
 ### Set up the defaults
@@ -191,6 +191,26 @@ Now allow connections for SSH (since this is the only service that we have runni
 
 ```bash
 sudo ufw allow ssh
+```
+
+or, but not both. _these commands both do the same thing with different syntax_
+
+```bash
+sudo ufw allow 22/tcp
+```
+
+Now turn on UFW
+
+```bash
+sudo ufw enable
+```
+
+Once again log into the server from another tab to make sure you can connect before disconnecting your previous ssh session.
+
+Check the status of `UFW`
+
+```bash
+sudo ufw status numbered
 ```
 
 For more information on `ufw` see here
