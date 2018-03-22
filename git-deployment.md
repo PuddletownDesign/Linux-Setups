@@ -6,9 +6,7 @@ This will enable us to push our projects to the web using a command like `git pu
 
 This will all take place on the Host side of the dev environment (Mac or on your computer)
 
-### create a new folder called `html` in your projects folder (shared folder we set up in [Local development server with Virtual box](https://github.com/PuddletownDesign/Linux-Setups/blob/master/local-development-server-with-virtualbox.md))
-
-### create a simple index file in side `html` folder
+### Create a new folder called `html` in your projects folder (shared folder we set up in [Local development server with Virtual box](https://github.com/PuddletownDesign/Linux-Setups/blob/master/local-development-server-with-virtualbox.md))
 
 Here's my fancy raindrops thing if you want to test with that
 
@@ -47,7 +45,7 @@ _Note: We had to use `sudo` here because the `var` directory is owned by root. W
 
 ### Correcting user permissions for our new git folder
 
-By default the `git` folder is owned by root and we will need `sudo` to be able to make changes in it. We could just change the user to our user, but what if we wanted to have other users be able to edit the contents of the `www` folder. This is where groups come in. A group can be defined to be allowed read/write access to specific files/ folders.
+By default the `git` folder is owned by root and we will need `sudo` to be able to make changes in it. We could just change the user to our user, but what if we wanted to have other users be able to edit the contents of the `git` folder. This is where groups come in. A group can be defined to be allowed read/write access to specific files/ folders.
 
 Add a group for users who will be able to `rwx` in for a folder. I'm just going to call this group `www-users`. for users who can edit the entire `www` directory. We can add more specific controls for different sites/folders later.
 
@@ -84,7 +82,7 @@ Now we log out and back in, because we modified the user during the current sess
 then log back in and go to the `/var/git`
 
 ```bash
-cd /var/www
+cd /var/git
 touch test.md
 ```
 
@@ -137,7 +135,7 @@ add it as a remote to the git repo
 git remote add live ssh://<username>@<ip-address-or-domain>/var/git/ip.git
 ```
 
-running `g rv` for `git remote -v` should show you the remotes you've added
+running `g rv` for `git remote -v` should show you the remote you've added
 
 ## Pushing changes to the live repo
 
@@ -147,11 +145,13 @@ lastly push it to the live server for deployment
 git push live master
 ```
 
+That's it! As long as you don't get any errors you should be able to look at the page on the web as see the updates were applied. 
+
 ## How to add another site (`<yourdomain.com>`)
 
 Now that we've set everything up and added one site, let's go ahead and add another for `<yourdomain.com>` so you can see the exact, basic process for each future site.
 
-_This assumes that you've [created a server block for this site and have nginx configured properly](https://github.com/PuddletownDesign/Linux-Setups/blob/master/installing-configuring-and-using-nginx-on-linux.md)_.
+_This assumes that you've [created a server block for `<yourdomain.com>` and have nginx configured properly](https://github.com/PuddletownDesign/Linux-Setups/blob/master/installing-configuring-and-using-nginx-on-linux.md)_.
 
 ### Creating a new live repo
 
@@ -209,3 +209,7 @@ In this tutorial we learned how to:
 4.  add a new remote to a local repos
 5.  deploy the local repo to the live server
 6.  set up an additional site
+
+## Where to go from here
+
+I recommend building on this lesson and the last three by setting up a static site generator and deploying it to a new server block with git.
