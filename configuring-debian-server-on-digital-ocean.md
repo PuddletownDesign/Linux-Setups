@@ -1,6 +1,6 @@
 # Initial Set up for Debian server on Digital Ocean with Puddletown Settings
 
-This guide will cover creating and basic configuration of a Debian server on digital ocean. In future guides we will cover, more advanced server security, setting up several websites on nginx, running crypto trading bots, and a host of other fun things.
+This guide will cover creating and basic configuration of a Debian server on digital ocean. In future guides we will cover, more advanced server security, setting up several websites on nginx with SSL, git deployment, running crypto trading bots, and a bunch of other fun things.
 
 The puddletown preferences listed in this guide are custom configurations for `zsh`, `git` and using Atom text editor remotely instead of using a server side editor like Vim or Nano. 
 
@@ -219,4 +219,4 @@ For more information on `ufw` see here
 
 ## Where to go from here
 
-I suggest reading up on advanced server security and learning about ufw, fail2ban and tripwire before moving onto any of the other guides. It's a wild world out there and it's best not to roll without protection. If rolling bareback is more your thing, feel free to skip to installing nginx and setting up a web server.
+I recommend moving on to [Installing, configuring and using nginx on with SSL](https://github.com/PuddletownDesign/Linux-Setups/blob/master/installing-configuring-and-using-nginx-on-linux.md)
