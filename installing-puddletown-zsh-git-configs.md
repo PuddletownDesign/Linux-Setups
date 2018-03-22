@@ -126,7 +126,7 @@ Let's install `thefuck`, cause it's handy #1 and will also get rid of the error 
 ```bash
 sudo apt update
 
-sudo apt install python3-dev python3-pip -y
+sudo apt install python3 python3-pip -y
 
 sudo pip3 install thefuck
 ```
@@ -243,7 +243,7 @@ sudo ratom /etc/motd
 Now let's add a multicolored fortune telling cow to your ssh login instead. 
 
 ```bash
-sudo apt-get install cowsay fortune screenfetch -y
+sudo apt-get install cowsay fortune neofetch -y
 ```
 
 now replace the contents of the  `/etc/update-motd.d/10-uname` file. This file is what prints out the string with os and last login.
@@ -262,8 +262,8 @@ R="\033[01;31m"
 G="\033[01;32m"
 X="\033[00;37m"
 
-echo "$G"
-screenfetch
+echo ""
+neofetch
 echo "$B"
 /usr/games/fortune | /usr/games/cowthink
 printf "\n$R"
