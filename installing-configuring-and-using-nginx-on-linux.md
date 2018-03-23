@@ -261,6 +261,8 @@ _We will not be able to use https to reach the ip address directly in the `/var/
 
 We want to direct all port 80 traffic to port 443 to be encrypted for `<yourdomain.com>`
 
+_UPDATE: Guide will soon be updated to configure wildcard(\*) domains to cover, chat.domain.com, mail.domain.com, domain.com etc..._
+
 ### Installing certbot
 
 Update apt and install certbot
