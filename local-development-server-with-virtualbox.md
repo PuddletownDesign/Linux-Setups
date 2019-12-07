@@ -220,8 +220,6 @@ Make sure to change `"Debian Headless"` to whatever you named the VM in virtualb
 VBoxHeadless --startvm "Debian Headless"
 ```
 
-Once the guide is complete come back and finish the remainder of this guide.
-
 ## Creating shared folders in virtual box
 
 ### Downloading the correct Guest additions
@@ -344,6 +342,4 @@ Whew! That was quite a ride, but you should now have a really functional develop
 
 ## Where to go from here
 
-I recommend learning next [how to set up a production Debian server on Digital Ocean or other VPS](https://github.com/PuddletownDesign/Linux-Setups/blob/master/configuring-debian-server-on-digital-ocean.md). It's actually a lot easier. However security and more configuration is involved.
-
-Good luck!
+I recommend learning next [how to set up a production Debian server on Digital Ocean or other VPS](https://github.com/PuddletownDesign/Linux-Setups/blob/master/configuring-debian-server-on-digital-ocean.md).

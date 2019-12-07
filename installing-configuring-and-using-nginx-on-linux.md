@@ -319,7 +319,7 @@ Let's do a dry run test as root to make sure everything's set up correctly.
 certbot renew --dry-run
 ```
 
-If you get a long message containing:
+Hopefully you get a long message containing:
 
 ```bash
 Congratulations, all renewals succeeded. The following certs have been renewed:
