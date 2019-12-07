@@ -116,15 +116,12 @@ We will be SSHing into the machine through the host only IP and using the NAT co
 
 Turn the machine back on and log in with your user. (We won't be using root anymore)
 
-## Install openssh-server for SSH connection
-
-```bash
-apt-get install openssh-server
-```
-
 Open up the network interfaces file
 
+``
+
 ```bash
+sudo cp /etc/network/interfaces /etc/network/interfaces.default
 sudo nano /etc/network/interfaces
 ```
 
@@ -232,7 +229,7 @@ Once the guide is complete come back and finish the remainder of this guide.
 Install dev tool dependencies
 
 ```bash
-sudo apt-get install linux-headers-$(uname -r) build-essential dkms -y
+sudo apt-get install build-essential dkms -y
 ```
 
 My Virtual box install is at 5.2.8 we need to grab the iso for the version that we are running.
@@ -257,27 +254,39 @@ wget http://download.virtualbox.org/virtualbox/5.2.8/VBoxGuestAdditions_5.2.8.is
 
 ##### Make a directory to mount the guest additions
 
-`sudo mkdir /media/VBoxGuestAdditions`
+```bash
+sudo mkdir /media/VBoxGuestAdditions
+```
 
 ##### Now mount them to above directory
 
-`sudo mount -o loop,ro VBoxGuestAdditions_5.2.8.iso /media/VBoxGuestAdditions`
+```bash
+sudo mount -o loop,ro VBoxGuestAdditions_5.2.8.iso /media/VBoxGuestAdditions
+```
 
 ##### Now install them
 
-`sudo sh /media/VBoxGuestAdditions/VBoxLinuxAdditions.run`
+```bash
+sudo sh /media/VBoxGuestAdditions/VBoxLinuxAdditions.run
+```
 
 ##### Unmount them
 
-`sudo umount /media/VBoxGuestAdditions`
+```bash
+sudo umount /media/VBoxGuestAdditions
+```
 
 ##### Delete the directory you created to hold them
 
-`sudo rmdir /media/VBoxGuestAdditions`
+```bash
+sudo rmdir /media/VBoxGuestAdditions
+```
 
 ##### Delete the iso unless you want to keep it
 
-`rm VBoxGuestAdditions_5.2.8.iso`
+```bash
+rm VBoxGuestAdditions_5.2.8.iso
+```
 
 ### Setting up shared folders
 
