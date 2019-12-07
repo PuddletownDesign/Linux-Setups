@@ -116,6 +116,12 @@ We will be SSHing into the machine through the host only IP and using the NAT co
 
 Turn the machine back on and log in with your user. (We won't be using root anymore)
 
+## Install openssh-server for SSH connection
+
+```bash
+apt-get install openssh-server
+```
+
 Open up the network interfaces file
 
 ```bash
@@ -134,18 +140,15 @@ source /etc/network/interfaces.d/*
 auto lo
 iface lo inet loopback
 
-# Host only network interface
+# The primary network interface (that's the NAT)
 auto enp0s3
-iface enp0s3 inet static
-address 192.168.56.107
-network 192.168.56.0
+iface enp0s3 inet dhcp
 
-# NAT network interface
+# Host-only network
 auto enp0s8
-iface enp0s8 inet dhcp
-dns-nameservers 8.8.8.8 8.8.4.4
-netmask 255.255.255.0
-broadcast 192.168.56.255
+iface enp0s8 inet static
+  address 192.168.56.101 #increment for each VM on your network
+  netmask 255.255.255.0
 ```
 
 now reboot the machine
