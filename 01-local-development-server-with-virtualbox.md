@@ -20,6 +20,7 @@ In this article we will be setting up a headless (no desktop) debian webserver i
 -   [(Optional) Server Security](#server-security)
     -   [Securing SSH](#securing-ssh)
     -   [Configuring a Basic firewall (UFW)](#configuring-a-basic-firewall-ufw)
+    -   [Running a deep port scan with nmap](<#running-a deep-port-scan-with-nmap>)
 -   [(Optional) Installing guest additions](#optional-installing-guest-additions)
 -   [(Optional) Setting up shared folders](#optional-setting-up-shared-folders)
 -   [(Optional) Starting a headless machine from the command line](#optional-starting-a-headless-machine-from-the-command-line-if-you-really-want-to)
@@ -27,13 +28,23 @@ In this article we will be setting up a headless (no desktop) debian webserver i
     -   [Take a snapshot](#take-a-snapshot)
     -   [Conclusion](#conclusion)
 
-## Install via Virtual Box
+## Install Virtual Box
 
 Install Virtualbox if you don't have it
 
-`brew cask install virtualbox`
+**On Mac**
 
-Grab a Debian Net installer torrent
+```bash
+brew cask install virtualbox
+```
+
+**On Linux**
+
+```bash
+sudo apt-get install virtualbox
+```
+
+**Next download a Debian Net installer torrent**
 
 <https://cdimage.debian.org/debian-cd/current/amd64/bt-cd/>
 
@@ -345,6 +356,58 @@ sudo ufw status numbered
 For more information on `ufw` see here
 
 <https://www.digitalocean.com/community/tutorials/how-to-setup-a-firewall-with-ufw-on-an-ubuntu-and-debian-cloud-server>
+
+### Running a deep port scan with nmap
+
+Nmap is one of those cool hacker tools that trinity used in that movie _The Matrix_. It runs a deep probe of the server from the outside revealing any open ports and information that can be extracted from them.
+
+On your **host** machine install `nmap`
+
+**on Mac**
+
+```bash
+brew install nmap
+```
+
+**on Linux**
+
+```bash
+sudo apt-get install nmap
+```
+
+Then fire it up against the VM
+
+```bash
+sudo nmap -T4 -A -v [ip-address-of-vm]
+```
+
+Nmap will return a bunch of information such as: 
+
+```bash
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.9p1 Debian 10+deb10u1 (protocol 2.0)
+```
+
+We can see here that there is only one way into the machine. Port 22 through openSSH.
+
+However we know that:
+
+1.  There is only 1 user
+2.  passwords don't work, keys are needed
+
+**All in all this is a pretty secure machine. Of course it doesn't do anything yet, so that's easy ;)**
+
+nmap also shows, public keys, the machines MAC address as well as all this:
+
+```bash
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+OS details: Linux 3.10 - 4.11, Linux 3.2 - 4.9
+Uptime guess: 41.914 days (since Sun Oct 27 06:54:59 2019)
+```
+
+That's a lot of information! It would probably be good to practice tightening up some of this leaked info. People on the outside just don't need to know that the OS is Debian 10 and how long the system has been up and what kernal version it's running.
+
+We will address this more in a later [guide on advanced server security](04-advanced-production-server-security.md).
 
 ## (Optional) Installing guest additions
 
