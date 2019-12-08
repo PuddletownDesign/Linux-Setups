@@ -1,4 +1,4 @@
-# Installing Puddletown ZSH and Git configs
+# Installing Puddletown ZSH, Shell and Git configs
 
 ## Installing the prerequists
 

@@ -1,4 +1,4 @@
-# Setting up XMPP Server on a VPS with Prosody
+# Setting up XMPP Server on a VPS with Prosody and using profanity client
 
 <https://www.youtube.com/watch?v=-0M0NeZ_cU4>
 

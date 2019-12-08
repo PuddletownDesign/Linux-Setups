@@ -1,6 +1,6 @@
-# Initial Set up for Debian server on Digital Ocean with Puddletown Settings
+# Setting up a remote production server on Digital Ocean with Debian 10
 
-This guide will cover creating and basic configuration of a Debian server on digital ocean. In future guides we will cover, more advanced server security, setting up several websites on nginx with SSL, git deployment, running crypto trading bots, and a bunch of other fun things.
+This guide will cover creating and basic configuration of a Debian server on digital ocean. In future guides we will cover, more advanced server security, setting up several websites reverse proxied through nginx with SSL, git deployment, making media servers, and a bunch of other fun things.
 
 The puddletown preferences listed in this guide are custom configurations for `zsh`, `git` and using Atom text editor remotely instead of using a server side editor like Vim or Nano. 
 
@@ -104,7 +104,7 @@ You can skip most of these installations and be ok finishing this guide substitu
 
 I also recommend creating forks of each of these packages to your own github and then replacing `PuddletownDesign` with your own github username.
 
-Please see the guide [Installing Puddletown Preferences](https://github.com/PuddletownDesign/Debian-Server-Setup/blob/master/installing-puddletown-zsh-git-configs.md)
+Please see the guide [Installing Puddletown Preferences for shell and git](https://github.com/PuddletownDesign/Linux-Setups/blob/master/03-installing-puddletown-zsh-git-configs.md)
 
 Once the guide is complete come back and finish the remainder of this guide.
 

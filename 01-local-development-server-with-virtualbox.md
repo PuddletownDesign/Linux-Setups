@@ -1,4 +1,4 @@
-# Local development server in Virtualbox with Debian 10
+# Setting up a local development server with Virtual box and Debian and SSH access
 
 ![debian](http://tinyimg.io/i/k9vc7m5.png)
 
@@ -246,7 +246,7 @@ You can skip most of these installations and be ok finishing this guide substitu
 
 I also recommend creating forks of each of these packages to your own github and then replacing `PuddletownDesign` with your own github username.
 
-Please see the guide [Installing Puddletown Preferences](https://github.com/PuddletownDesign/Debian-Server-Setup/blob/master/installing-puddletown-zsh-git-configs.md)
+Please see the guide [Installing Puddletown Preferences for shell and git](https://github.com/PuddletownDesign/Linux-Setups/blob/master/03-installing-puddletown-zsh-git-configs.md)
 
 ## (Optional) Server Security
 
