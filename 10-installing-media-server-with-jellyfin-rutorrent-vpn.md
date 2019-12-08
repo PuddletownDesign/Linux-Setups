@@ -1,4 +1,4 @@
-# Installing Jellyfin media server remotely and RSS torrent seedbox integration on Debian
+# Installing Jellyfin media server remotely and RSS powered torrent seedbox with a VPN on Debian
 
 In this tutorial we will be installing a streaming media server (like netflix) but hosted under your control. Then we will install a torrent seedbox configured with RSS to automatically download new shows and then a VPN to protect privacy to the server.
 
