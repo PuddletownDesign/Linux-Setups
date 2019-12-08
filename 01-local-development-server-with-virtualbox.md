@@ -235,7 +235,7 @@ If everything is working well you should be logged in with no password!
 ```bash
 sudo apt-get update && sudo apt-get upgrade
 
-sudo apt-get install nano net-tools aptitude screen
+sudo apt-get -y install net-tools aptitude screen
 ```
 
 ## (Optional) Installing puddletown preferences
@@ -321,10 +321,10 @@ Set up the default rules (deny all incoming)
 sudo ufw default deny incoming
 ```
 
-and
+and allow all out going connections
 
 ```bash
-sudo ufw default allow outgoing (allow all out going)
+sudo ufw default allow outgoing
 ```
 
 Now allow connections for SSH (since this is the only service that we have running so far)
@@ -347,7 +347,7 @@ sudo ufw enable
 
 Once again log into the server from another tab to make sure you can connect before disconnecting your previous ssh session.
 
-Check the status of `UFW`
+Check the status of `ufw`
 
 ```bash
 sudo ufw status numbered
@@ -359,7 +359,7 @@ For more information on `ufw` see here
 
 ### Running a deep port scan with nmap
 
-Nmap is one of those cool hacker tools that trinity used in that movie _The Matrix_. It runs a deep probe of the server from the outside revealing any open ports and information that can be extracted from them.
+Nmap is one of those cool hacker tools that Trinity used in _The Matrix_. It runs a deep probe of the server from the outside revealing any open ports and information that can be extracted from them.
 
 On your **host** machine install `nmap`
 
@@ -490,7 +490,7 @@ Create a folder on the Host computer that you would like to share, for example `
 3.  Choose the 'Add' button.
     Select `~/Dev/Sites` Optionally select the 'Make permanent' and "auto mount" option
 
-With a shared folder named share, as above, the folder can be mounted as the directory ~/host with the command
+With a shared folder named share, as above, the folder can be mounted from the host
 
 first let's trash the default www folder and remake it...
 
@@ -522,6 +522,7 @@ You can test this by going to `/var/www` and creating a test file. You will see 
 Make sure to change `"Debian Headless"` to whatever you named the VM in virtualbox.
 
 ```bash
+screen -S server
 VBoxHeadless --startvm "Debian Headless"
 ```
 
@@ -531,7 +532,20 @@ I recommend learning next [how to set up a production Debian server on Digital O
 
 ### Take a snapshot
 
-In virtual box manager, take a snapshot of the VM at this point. I named mine "Fresh Install".
+In virtual box manager, take a snapshot of the VM at this point. I named mine "Fresh Install". Then you can clone this machine in the snap shot pane. 
+
+In the future to create new VMs based on this one at this point (should take 2-3 minutes total):
+
+1.  Open up virtualbox GUI
+2.  Clone machine. Everyting. Leave it all the exact same.
+3.  Boot machine and `sudo nano /etc/network/interfaces`
+4.  adjust the ip to one that's not taken
+5.  `poweroff` the VM and start headless
+6.  connect via ssh to the IP that you set in the `interfaces` file
+7.  Link the new machine name and ip in the host's `~/.ssh/config` file
+8.  do any customizations to distinguish it from the others (hostname, shell theme)
+
+Now you have a brand new VM based on this point!
 
 ### Conclusion
 
