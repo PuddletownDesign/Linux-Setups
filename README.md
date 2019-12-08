@@ -19,16 +19,13 @@ Ideally these guides should be implemented in order, especially in the beginning
 9.  [Setting up XMPP Server on a VPS with Prosody and using profanity client on Debian](https://github.com/PuddletownDesign/Linux-Setups/blob/master/09-installing-xmpp-chat-prosody-server-and-using-profanity.md)
 10. [Build your own netlfix - Installing Jellyfin media server and RSS powered torrent seedbox with a VPN on Debian](https://github.com/PuddletownDesign/Linux-Setups/blob/master/10-installing-media-server-with-jellyfin-rutorrent-vpn.md)
 
-###### If I'm able to help anyone, donations would be _super_ appreicated
+### If I'm able to help anyone, donations would be _super_ appreicated
 
-###### BTC:
-
+**BTC:**  
 1MQbTZYpco6m12h8mpuFhr35h4xSKCKMTW
 
-###### ETH/BAT:
-
+**ETH/BAT:**  
 0xCe25133938FBb2e742bEf8f668c67F1f7CE96f66
 
-###### XMR:
-
+**XMR:**  
 88GWmTj4oAC5GukbLyngkHBiu2q6Rd8WaJmAna27LA9e2DwnFtpsAiVMSeUzZLvi3W7bhopf1NKyXgAyvHzDzt1R8qsAp3v
