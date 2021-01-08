@@ -1,0 +1,65 @@
+installing gazelle
+
+default-libmysqld-dev
+libmariadb-dev
+libpng-dev 
+libmcrypt-dev 
+libxml2-dev 
+memcached 
+sphinxsearch 
+binutils 
+libev-dev
+php-soap 
+php-pear
+php7.3-memcache
+php7.3-curl php7.3-mysql php7.3-mcrypt php7.3-gd sendmail
+libmcrypt4 ?????
+
+ocelot packs
+
+make g++ libbz2-dev libtcmalloc-minimal4
+
+
+ln -s /usr/lib/tc/m_xt.so /usr/lib/libtcmalloc.so
+
+cd ~
+
+wget https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.gz
+
+cd boost_1_72_0/
+
+./bootstrap.sh --prefix=/usr/local
+
+./b2 stage toolset=gcc cxxflags=-std=gnu++11 threading=multi link=shared
+
+sudo ./b2 install toolset=gcc cxxflags=-std=gnu++11 threading=multi link=shared
+
+
+server {
+        root /var/www;
+        index index.php;
+
+        server_name HOST_NAME;
+
+        location / {
+                try_files $uri $uri/ /index.php;
+        }
+
+        location ~ \.php$ {
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+                fastcgi_index index.php;
+                include fastcgi_params;
+        }
+}
+
+
+On Host/ Guest depending on shared folders
+
+git clone https://github.com/WhatCD/Gazelle.git
+sudo mkdir /var/www
+sudo cp -r Gazelle/* /var/www
+
+On Guest
+
+sudo mariadb -u root < /var/www/gazelle.sql
