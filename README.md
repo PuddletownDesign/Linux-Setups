@@ -1,10 +1,8 @@
-# Brent's Linux Bible
-
-## Linux server set up, hacking, administration & development 
 
 
+# ![spacer](_.gif)![puddletown logo](logo-puddletown.png)Puddletown Linux Bible
 
-![debian linux logo](debian-logo.png)
+####  ![spacer](_.gif)![spacer](_.gif)Linux server set up, hacking, administration & development
 
 These guides will cover my journey hacking linux servers and making them work for common and cool tasks.
 
@@ -14,25 +12,30 @@ For users new to the world of Linux servers these guides should be read in order
 
 ------
 
-## Table of contents
+## Table of contents 
 
-1. [System Installations](system-installations/README.md)
-   1. Setting up a Local Development Server
-      1. Choosing a Hardware Virtualizer
+1. ### Common command line tools
 
-
+   1. ~~zsh~~
+   2. ~~git~~
+   3. puddletown configs
+   4. rsync
+   5. ~~tmux~~
 
 ------
 
+## If I'm able to help anyone
 
+##### donations would be super appreciated
 
-### If I'm able to help anyone, donations would be super appreciated
+| **BTC:**     | 1MQbTZYpco6m12h8mpuFhr35h4xSKCKMTW                           |
+| ------------ | ------------------------------------------------------------ |
+| **ETH/BAT:** | 0xCe25133938FBb2e742bEf8f668c67F1f7CE96f66                   |
+| **XMR:**     | 88GWmTj4oAC5GukbLyngkHBiu2q6Rd8WaJmAna27LA9e2DwnFtpsAiVMSeUzZLvi3W7bhopf1NKyXgAyvHzDzt1R8qsAp3v |
 
-**BTC:**  
-1MQbTZYpco6m12h8mpuFhr35h4xSKCKMTW
+![debian linux logo](logo-debian.png)
 
-**ETH/BAT:**  
-0xCe25133938FBb2e742bEf8f668c67F1f7CE96f66
+------
 
-**XMR:**  
-88GWmTj4oAC5GukbLyngkHBiu2q6Rd8WaJmAna27LA9e2DwnFtpsAiVMSeUzZLvi3W7bhopf1NKyXgAyvHzDzt1R8qsAp3v
+❤ **2020** Puddletown Design
+
