@@ -1,8 +1,8 @@
 
 
-# ![spacer](_.gif)![puddletown logo](logo-puddletown.png)Puddletown Linux Bible
+# ![spacer](spacer.gif)![puddletown logo](logo-puddletown.png)Puddletown Linux Bible
 
-####  ![spacer](_.gif)![spacer](_.gif)Linux server set up, hacking, administration & development
+####  ![spacer](spacer.gif)![spacer](spacer.gif)Linux server set up, hacking, administration & development
 
 These guides will cover my journey hacking linux servers and making them work for common and cool tasks.
 
